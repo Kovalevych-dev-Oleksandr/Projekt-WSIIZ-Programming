@@ -10,10 +10,7 @@ public class StudentDao {
         this.db = db;
     }
 
-    public void create(StudentUITM studentUITM) {
-
-        db.create(studentUITM);
-    }
+    public void create(StudentUITM studentUITM) { db.create(studentUITM); }
 
     public StudentUITM findById(String id) {
         return db.findById(id);

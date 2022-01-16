@@ -11,10 +11,7 @@ public class StudentService {
         this.studentDao=studentDao;
     }
 
-    public void create (StudentUITM studentUITM) {
-
-        studentDao.create(studentUITM);
-    }
+    public void create (StudentUITM studentUITM) { studentDao.create(studentUITM); }
 
     public StudentUITM findById(String id) {
         return studentDao.findById(id);

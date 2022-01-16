@@ -9,16 +9,10 @@ public class StudentController {
     public StudentController(StudentService studentService){
         this.studentService=studentService;
     }
-    public void create(StudentUITM studentUITM){
-        studentService.create(studentUITM);
-    }
-    public StudentUITM findById(String id) {
-        return studentService.findById(id);
-    }
+    public void create(StudentUITM studentUITM){ studentService.create(studentUITM);}
+    public StudentUITM findById(String id) { return studentService.findById(id); }
 
-    public StudentUITM[] findAll() {
-        return studentService.findAll();
-    }
+    public StudentUITM[] findAll() { return studentService.findAll();}
 
     public void update(StudentUITM studentUITM) {
         studentService.update(studentUITM);
