@@ -147,7 +147,7 @@ public class Screen extends JFrame {
                         SetProgramingField.getText(),
                         SetHistoryField.getText(),
                         SetPhysicsField.getText()});
-                studentService.update(studentUITM);
+                SetIDField.setText(studentService.update(studentUITM));
                 refreshArray();
 
             }
@@ -165,7 +165,9 @@ public class Screen extends JFrame {
             }
         });
     }
-
+   /* public static String update(StudentUITM studentUITM){
+        return studentService.update(studentUITM);
+    }*/
     public static String addStudent(StudentUITM studentUITM) {
         String result = studentService.create(studentUITM);
         students = Arrays.asList(studentService.findAll());

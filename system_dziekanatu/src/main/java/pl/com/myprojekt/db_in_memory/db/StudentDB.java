@@ -36,13 +36,16 @@ public class StudentDB {
         students[students.length] = studentUITM;
     }
 
-    public void update(final StudentUITM studentUITM) {//worker
+    public String update(StudentUITM studentUITM) {//worker
         StudentUITM current = this.findById(studentUITM.getId());
         if (current != null) {
             current.setName(studentUITM.getName());
             current.setSurname(studentUITM.getSurname());
             current.setYearOfBirth(studentUITM.getYearOfBirth());
             current.setGradesForTheExam(studentUITM.getGradesForTheExam());
+            return "Student was update";
+        }else {
+            return "we dont have student with this id";
         }
     }
 

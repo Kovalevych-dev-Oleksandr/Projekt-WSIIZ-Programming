@@ -20,8 +20,8 @@ public class StudentDao {
         return db.findAll();
     }
 
-    public void update(StudentUITM studentUITM) {
-        db.update(studentUITM);
+    public String update(StudentUITM studentUITM) {
+        return db.update(studentUITM);
     }
 
     public void delete(String id) {

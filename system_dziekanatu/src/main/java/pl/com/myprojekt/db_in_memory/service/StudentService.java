@@ -25,9 +25,7 @@ public class StudentService {
         return studentDao.findAll();
     }
 
-    public void update(StudentUITM studentUITM) {
-        studentDao.update(studentUITM);
-    }
+    public String update(StudentUITM studentUITM) {return studentDao.update(studentUITM); }
 
     public void delete(String id) {
         studentDao.delete(id);
