@@ -1,7 +1,7 @@
-package pl.com.myprojekt.dbinmemory.dao;
+package pl.com.myprojekt.db_in_memory.dao;
 
-import pl.com.myprojekt.dbinmemory.db.StudentDB;
-import pl.com.myprojekt.dbinmemory.entity.StudentUITM;
+import pl.com.myprojekt.db_in_memory.db.StudentDB;
+import pl.com.myprojekt.db_in_memory.entity.StudentUITM;
 
 public class StudentDao {
     private final StudentDB db;
@@ -10,7 +10,7 @@ public class StudentDao {
         this.db = db;
     }
 
-    public void create(StudentUITM studentUITM) { db.create(studentUITM); }
+    public void create(StudentUITM studentUITM) {db.create(studentUITM); }
 
     public StudentUITM findById(String id) {
         return db.findById(id);

@@ -1,16 +1,18 @@
 package pl.com.myprojekt.run;
 
-import pl.com.myprojekt.dbinmemory.controller.StudentController;
-import pl.com.myprojekt.dbinmemory.dao.StudentDao;
-import pl.com.myprojekt.dbinmemory.db.StudentDB;
-import pl.com.myprojekt.dbinmemory.entity.StudentUITM;
-import pl.com.myprojekt.dbinmemory.service.StudentService;
+import pl.com.myprojekt.db_in_memory.controller.StudentController;
+import pl.com.myprojekt.db_in_memory.dao.StudentDao;
+import pl.com.myprojekt.db_in_memory.db.StudentDB;
+import pl.com.myprojekt.db_in_memory.entity.StudentUITM;
+import pl.com.myprojekt.db_in_memory.service.StudentService;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-    public class ProgramRun {
+public class ProgramRun extends JFrame {
+
 
 
         public void run() {
@@ -72,16 +74,16 @@ import java.io.InputStreamReader;
                 String surname = getString(reader, "Please, enter your Surname:");
                 String yearOfBirthString = getString(reader, "Please, enter your Year of Birth:");
                 int yearOfBirth=Integer.parseInt(yearOfBirthString);
-                int[]newArray=new int [5];
+                String[] newArray=new String [5];
                 for(int i=0;i<5;i++){
                     String elementArray=getString(reader, "Please, enter "+ (i+1) +" mark:");
-                    newArray[i]=Integer.parseInt(elementArray);
+                    newArray[i]=elementArray;
                 }
                 StudentUITM studentUITM = new StudentUITM();
                 studentUITM.setName(name);
                 studentUITM.setSurname(surname);
                 studentUITM.setYearOfBirth(yearOfBirth);
-                studentUITM.setGradesForTheExam(newArray);
+                //studentUITM.setGradesForTheExam(newArray);
                 controller.create(studentUITM);
             } catch (IOException e) {
                 System.out.println("problem: = " + e.getMessage());
@@ -157,5 +159,5 @@ import java.io.InputStreamReader;
         {
             return new int[]{firstNumber,secondNumber,thirdNumber,fourthNumber,fifthNumber};
         }
-    }
 
+}

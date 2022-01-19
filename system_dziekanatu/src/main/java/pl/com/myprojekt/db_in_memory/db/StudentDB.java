@@ -1,6 +1,6 @@
-package pl.com.myprojekt.dbinmemory.db;
+package pl.com.myprojekt.db_in_memory.db;
 
-import pl.com.myprojekt.dbinmemory.entity.StudentUITM;
+import pl.com.myprojekt.db_in_memory.entity.StudentUITM;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -8,6 +8,9 @@ import java.util.UUID;
 public class StudentDB {
     private static final int START_ARRAY_SIZE = 30;
     private static StudentUITM[] students = new StudentUITM[START_ARRAY_SIZE];
+   /* private StudentDB instants =new StudentDB();
+
+    private StudentDB(){}*/
 
     public void create(final StudentUITM studentUITM) {
         boolean dataRecordingCapability = false;
