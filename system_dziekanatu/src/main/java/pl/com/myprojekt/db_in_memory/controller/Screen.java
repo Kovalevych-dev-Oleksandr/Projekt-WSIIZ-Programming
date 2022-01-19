@@ -97,15 +97,15 @@ public class Screen extends JFrame {
                 int selectionNumber = listStudents.getSelectedIndex();
                 if (selectionNumber >= 0) {
                     StudentUITM studentUITM = students.get(selectionNumber);
-                    String[] array = studentUITM.getGradesForTheExam();
+                    int[] array = studentUITM.getGradesForTheExam();
                     textId.setText(studentUITM.getId());
                     textName.setText(studentUITM.getName());
                     textGrades.setText(String.valueOf(studentService.ratingCalculation(studentUITM)));
-                    textMath.setText(array[0]);
-                    textEnglish.setText(array[1]);
-                    textPrograming.setText(array[2]);
-                    textHistory.setText(array[3]);
-                    textPhysics.setText(array[4]);
+                    textMath.setText(String.valueOf(array[0]));
+                    textEnglish.setText(String.valueOf(array[1]));
+                    textPrograming.setText(String.valueOf(array[2]));
+                    textHistory.setText(String.valueOf(array[3]));
+                    textPhysics.setText(String.valueOf(array[4]));
                     textSubjectMath.setText(ExamsName.getFirstExam());
                     textSubjectEnglish.setText(ExamsName.getSecondExam());
                     textSubjectPrograming.setText(ExamsName.getThreadExam());
@@ -127,7 +127,12 @@ public class Screen extends JFrame {
                         setNameField.getText(),
                         setSurnameFild.getText(),
                         setIDField.getText(),
-                        new String[]{setMathField.getText(), setEnglishField.getText(), setProgramingField.getText(), setHistoryField.getText(), setPhysicsField.getText()}
+                        new int[]{
+                                Integer.parseInt(setMathField.getText()),
+                                Integer.parseInt(setEnglishField.getText()),
+                                Integer.parseInt(setProgramingField.getText()),
+                                Integer.parseInt(setHistoryField.getText()),
+                                Integer.parseInt(setPhysicsField.getText())}
                 );
                 setOperationIformation.setText(update(studentUITM));
                 clear();
@@ -144,12 +149,12 @@ public class Screen extends JFrame {
                 studentUITM.setName(setNameField.getText());
                 studentUITM.setSurname(setSurnameFild.getText());
                 studentUITM.setYearOfBirth(Integer.parseInt(setYearFild.getText()));
-                studentUITM.setGradesForTheExam(new String[]{
-                        setMathField.getText(),
-                        setEnglishField.getText(),
-                        setProgramingField.getText(),
-                        setHistoryField.getText(),
-                        setPhysicsField.getText()});
+                studentUITM.setGradesForTheExam(new int[]{
+                        Integer.parseInt(setMathField.getText()),
+                        Integer.parseInt(setEnglishField.getText()),
+                        Integer.parseInt(setProgramingField.getText()),
+                        Integer.parseInt(setHistoryField.getText()),
+                        Integer.parseInt(setPhysicsField.getText())});
                 setOperationIformation.setText(studentService.update(studentUITM));
                 clear();
                 refreshArray();

@@ -6,11 +6,11 @@ public class StudentUITM extends BaseEntity {
     private String surname;
     private String name;
     private int yearOfBirth;
-    private String[] gradesForTheExam =new String[SIZE_ARRAY_GRADES];
+    private int[] gradesForTheExam =new int[SIZE_ARRAY_GRADES];
     public static final int SIZE_ARRAY_GRADES = 5;
 
     public StudentUITM(){}
-    public StudentUITM(int yearOfBirth,String name,String surname,String id,String[] gradesForTheExam){
+    public StudentUITM(int yearOfBirth,String name,String surname,String id,int[] gradesForTheExam){
         this.yearOfBirth=yearOfBirth;
         this.name=name;
         this.surname=surname;
@@ -41,12 +41,12 @@ public class StudentUITM extends BaseEntity {
         this.surname = surname;
     }
 
-    public String[] getGradesForTheExam() {
+    public int[] getGradesForTheExam() {
         return gradesForTheExam;
     }
 
 
-    public void setGradesForTheExam(String[] gradesForTheExam) {
+    public void setGradesForTheExam(int[] gradesForTheExam) {
 
         this.gradesForTheExam = gradesForTheExam;
 
@@ -61,7 +61,6 @@ public class StudentUITM extends BaseEntity {
                         ", surname='" + surname + '\'' +
                         ", name='" + name + '\'' +
                         ", year of birth ='" + yearOfBirth + '\'' +
-                        ", gradesForTheExam ='" + Arrays.deepToString(gradesForTheExam) + '\'' +
                         '}';
     }
 

@@ -65,9 +65,9 @@ public class StudentService {
     }*/
     public int ratingCalculation(StudentUITM studentUITM) {
         int result = 0;
-        String[] bufferArray = studentUITM.getGradesForTheExam();
+        int[] bufferArray = studentUITM.getGradesForTheExam();
         for (int i = 0; i < StudentUITM.SIZE_ARRAY_GRADES; i++) {
-            result = result + Integer.parseInt(bufferArray[i]);
+            result = result +bufferArray[i];
         }
 
         return result/StudentUITM.SIZE_ARRAY_GRADES;
