@@ -41,10 +41,10 @@ public class Screen extends JFrame {
     private static DefaultListModel listStudentModel;
 
 
-    public Screen() {
-        super("Dean 's Office UITM");
+    public Screen(String title) {
+        super(title);
 
-        this.setContentPane(this.mainPanel);
+        this.setContentPane(mainPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         students = new ArrayList<StudentUITM>();

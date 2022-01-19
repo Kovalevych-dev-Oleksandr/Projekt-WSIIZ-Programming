@@ -9,7 +9,7 @@ public class SystemDziekanatuMain {
 
         /*ProgramRun programRun= new ProgramRun();
         programRun.run();*/
-        Screen screen = new Screen();
+        Screen screen = new Screen("Dean 's Office UITM");
         screen.setVisible(true);
         startCreate();
 
