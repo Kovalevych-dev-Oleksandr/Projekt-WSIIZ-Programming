@@ -80,6 +80,7 @@ public class Screen extends JFrame {
         listStudents.setModel(listStudentModel);
         list1.setModel(listStudentModel);
         createButtonButton.setEnabled(true);
+        updateButtonButton.setEnabled(true);
 
         MathField.setText(ExamsName.getFirstExam());
         EnglishField.setText(ExamsName.getSecondExam());
@@ -132,17 +133,21 @@ public class Screen extends JFrame {
         updateButtonButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int selectionNumber = listStudents.getSelectedIndex();
-                if (selectionNumber >= 0) {
-                    StudentUITM studentUITM = students.get(selectionNumber);
-                    studentUITM.setName(textName.getText());
-                    studentUITM.setId(textId.getText());
-                    studentUITM.setSurname(textSurname.getText());
-                    studentUITM.setYearOfBirth(Integer.parseInt(textDateOfBirth.getText()));
-                    studentUITM.setGradesForTheExam(new String[]{textMath.getText(), textEnglish.getText(), textPrograming.getText(), textHistory.getText(), textPhysics.getText()});
-                    studentService.update(studentUITM);
-                    refreshArray();
-                }
+
+                StudentUITM studentUITM = new StudentUITM();
+                studentUITM.setId(SetIDField.getText());
+                studentUITM.setName(SetNameField.getText());
+                studentUITM.setSurname(SetSurnameFild.getText());
+                studentUITM.setYearOfBirth(Integer.parseInt(SetYearFild.getText()));
+                studentUITM.setGradesForTheExam(new String[]{
+                        SetMathField.getText(),
+                        SetEnglishField.getText(),
+                        SetProgramingField.getText(),
+                        SetHistoryField.getText(),
+                        SetPhysicsField.getText()});
+                studentService.update(studentUITM);
+                refreshArray();
+
             }
         });
         list1.addListSelectionListener(new ListSelectionListener() {
