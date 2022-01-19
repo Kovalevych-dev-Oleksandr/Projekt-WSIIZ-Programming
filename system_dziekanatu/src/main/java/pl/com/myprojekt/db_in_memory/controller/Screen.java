@@ -45,25 +45,28 @@ public class Screen extends JFrame {
     private JLabel labelId;
     private JTabbedPane CrudLeble;
     private JPanel panelTop;
-    private JTextField SetIDField;
-    private JTextField SetNameField;
-    private JTextField SetSurnameFild;
-    private JTextField SetYearFild;
-    private JTextField MathField;
-    private JTextField EnglishField;
-    private JTextField ProgramingField;
-    private JTextField HistoryField;
-    private JTextField PhysicsField;
+    private JTextField setIDField;
+    private JTextField setNameField;
+    private JTextField setSurnameFild;
+    private JTextField setYearFild;
+    private JTextField mathField;
+    private JTextField englishField;
+    private JTextField programingField;
+    private JTextField historyField;
+    private JTextField physicsField;
     private JButton deleteButton;
     private JButton deleteAllButton;
     private JList list1;
-    private JTextField SetMathField;
-    private JTextField SetEnglishField;
-    private JTextField SetProgramingField;
-    private JTextField SetHistoryField;
-    private JTextField SetPhysicsField;
+    private JTextField setMathField;
+    private JTextField setEnglishField;
+    private JTextField setProgramingField;
+    private JTextField setHistoryField;
+    private JTextField setPhysicsField;
     private JPanel Iformations;
     private JPanel CRUD;
+    private JPanel iformations;
+    private JLabel iformation;
+    private JTextField setOperationIformation;
     private static StudentService studentService = new StudentService(new StudentDao(new StudentDB()));
     private static List<StudentUITM> students;
     private static DefaultListModel listStudentModel;
@@ -82,11 +85,11 @@ public class Screen extends JFrame {
         createButtonButton.setEnabled(true);
         updateButtonButton.setEnabled(true);
 
-        MathField.setText(ExamsName.getFirstExam());
-        EnglishField.setText(ExamsName.getSecondExam());
-        ProgramingField.setText(ExamsName.getThreadExam());
-        HistoryField.setText(ExamsName.getForthExam());
-        PhysicsField.setText(ExamsName.getFifthExam());
+        mathField.setText(ExamsName.getFirstExam());
+        englishField.setText(ExamsName.getSecondExam());
+        programingField.setText(ExamsName.getThreadExam());
+        historyField.setText(ExamsName.getForthExam());
+        physicsField.setText(ExamsName.getFifthExam());
 
         listStudents.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -120,15 +123,15 @@ public class Screen extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 StudentUITM studentUITM = new StudentUITM(
-                        Integer.parseInt(SetYearFild.getText()),
-                        SetNameField.getText(),
-                        SetSurnameFild.getText(),
-                        SetIDField.getText(),
-                        new String[]{SetMathField.getText(), SetEnglishField.getText(), SetProgramingField.getText(), SetHistoryField.getText(), SetPhysicsField.getText()}
+                        Integer.parseInt(setYearFild.getText()),
+                        setNameField.getText(),
+                        setSurnameFild.getText(),
+                        setIDField.getText(),
+                        new String[]{setMathField.getText(), setEnglishField.getText(), setProgramingField.getText(), setHistoryField.getText(), setPhysicsField.getText()}
                 );
+                setOperationIformation.setText(update(studentUITM));
                 clear();
-                SetIDField.setText(addStudent(studentUITM));
-
+                refreshArray();
             }
         });
 
@@ -137,17 +140,18 @@ public class Screen extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 StudentUITM studentUITM = new StudentUITM();
-                studentUITM.setId(SetIDField.getText());
-                studentUITM.setName(SetNameField.getText());
-                studentUITM.setSurname(SetSurnameFild.getText());
-                studentUITM.setYearOfBirth(Integer.parseInt(SetYearFild.getText()));
+                studentUITM.setId(setIDField.getText());
+                studentUITM.setName(setNameField.getText());
+                studentUITM.setSurname(setSurnameFild.getText());
+                studentUITM.setYearOfBirth(Integer.parseInt(setYearFild.getText()));
                 studentUITM.setGradesForTheExam(new String[]{
-                        SetMathField.getText(),
-                        SetEnglishField.getText(),
-                        SetProgramingField.getText(),
-                        SetHistoryField.getText(),
-                        SetPhysicsField.getText()});
-                SetIDField.setText(studentService.update(studentUITM));
+                        setMathField.getText(),
+                        setEnglishField.getText(),
+                        setProgramingField.getText(),
+                        setHistoryField.getText(),
+                        setPhysicsField.getText()});
+                setOperationIformation.setText(studentService.update(studentUITM));
+                clear();
                 refreshArray();
 
             }
@@ -161,21 +165,28 @@ public class Screen extends JFrame {
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                setOperationIformation.setText(studentService.delete(setIDField.getText()));
+                clear();
+                refreshArray();
+            }
+        });
+        deleteAllButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setOperationIformation.setText(studentService.deleteAll());
+                refreshArray();
             }
         });
     }
-   /* public static String update(StudentUITM studentUITM){
-        return studentService.update(studentUITM);
-    }*/
-    public static String addStudent(StudentUITM studentUITM) {
+
+    public static String update(StudentUITM studentUITM) {
         String result = studentService.create(studentUITM);
-        students = Arrays.asList(studentService.findAll());
         refreshArray();
         return result;
     }
 
     private static void refreshArray() {
+        students = Arrays.asList(studentService.findAll());
         listStudentModel.removeAllElements();
         for (int i = 0; i < students.size(); i++) {
             System.out.println(students.get(i).getId());
@@ -184,15 +195,15 @@ public class Screen extends JFrame {
     }
 
     private void clear() {
-        SetYearFild.setText("");
-        SetNameField.setText("");
-        SetSurnameFild.setText("");
-        SetIDField.setText("");
-        SetMathField.setText("");
-        SetEnglishField.setText("");
-        SetProgramingField.setText("");
-        SetHistoryField.setText("");
-        SetPhysicsField.setText("");
+        setYearFild.setText("");
+        setNameField.setText("");
+        setSurnameFild.setText("");
+        setIDField.setText("");
+        setMathField.setText("");
+        setEnglishField.setText("");
+        setProgramingField.setText("");
+        setHistoryField.setText("");
+        setPhysicsField.setText("");
     }
 
 }

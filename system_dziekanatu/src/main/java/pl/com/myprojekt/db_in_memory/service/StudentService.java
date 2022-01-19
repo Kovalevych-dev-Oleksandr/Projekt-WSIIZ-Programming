@@ -27,8 +27,8 @@ public class StudentService {
 
     public String update(StudentUITM studentUITM) {return studentDao.update(studentUITM); }
 
-    public void delete(String id) {
-        studentDao.delete(id);
+    public String delete(String id) {
+        return studentDao.delete(id);
     }
 
     public StudentUITM BirthYearOfStudent(String id) {
@@ -36,6 +36,7 @@ public class StudentService {
         studentUITM.setYearOfBirth(studentsYear(studentUITM));
         return studentUITM;
     }
+    public String deleteAll() {return studentDao.deleteAll(); }
 
 
 

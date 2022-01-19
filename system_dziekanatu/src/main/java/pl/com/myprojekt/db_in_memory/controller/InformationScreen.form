@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="MainPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="603" height="729"/>
+      <xy x="20" y="20" width="617" height="735"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -286,7 +286,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <grid id="4a241" layout-manager="GridLayoutManager" row-count="6" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="4a241" binding="iformations" layout-manager="GridLayoutManager" row-count="5" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -297,14 +297,14 @@
                   <grid id="13d34" layout-manager="GridLayoutManager" row-count="14" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                     <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <background color="-1114881"/>
                     </properties>
                     <border type="none"/>
                     <children>
-                      <component id="291d6" class="javax.swing.JTextField" binding="SetNameField">
+                      <component id="291d6" class="javax.swing.JTextField" binding="setNameField">
                         <constraints>
                           <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -312,7 +312,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="3e472" class="javax.swing.JTextField" binding="SetYearFild">
+                      <component id="3e472" class="javax.swing.JTextField" binding="setYearFild">
                         <constraints>
                           <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -320,7 +320,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="ae8b7" class="javax.swing.JTextField" binding="SetSurnameFild">
+                      <component id="ae8b7" class="javax.swing.JTextField" binding="setSurnameFild">
                         <constraints>
                           <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -357,7 +357,7 @@
                           <text value="Year Of Birth:"/>
                         </properties>
                       </component>
-                      <component id="ec290" class="javax.swing.JTextField" binding="SetMathField">
+                      <component id="ec290" class="javax.swing.JTextField" binding="setMathField">
                         <constraints>
                           <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -365,7 +365,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="7fa9c" class="javax.swing.JTextField" binding="SetEnglishField">
+                      <component id="7fa9c" class="javax.swing.JTextField" binding="setEnglishField">
                         <constraints>
                           <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -373,7 +373,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="a46a4" class="javax.swing.JTextField" binding="SetProgramingField">
+                      <component id="a46a4" class="javax.swing.JTextField" binding="setProgramingField">
                         <constraints>
                           <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -383,7 +383,7 @@
                           <text value=""/>
                         </properties>
                       </component>
-                      <component id="a81fc" class="javax.swing.JTextField" binding="SetHistoryField">
+                      <component id="a81fc" class="javax.swing.JTextField" binding="setHistoryField">
                         <constraints>
                           <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -393,7 +393,7 @@
                           <text value=""/>
                         </properties>
                       </component>
-                      <component id="cc281" class="javax.swing.JTextField" binding="SetPhysicsField">
+                      <component id="cc281" class="javax.swing.JTextField" binding="setPhysicsField">
                         <constraints>
                           <grid row="12" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -401,7 +401,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="22dc3" class="javax.swing.JTextField" binding="MathField">
+                      <component id="22dc3" class="javax.swing.JTextField" binding="mathField">
                         <constraints>
                           <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -409,7 +409,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="6e19b" class="javax.swing.JTextField" binding="EnglishField">
+                      <component id="6e19b" class="javax.swing.JTextField" binding="englishField">
                         <constraints>
                           <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -417,7 +417,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="af6cd" class="javax.swing.JTextField" binding="ProgramingField">
+                      <component id="af6cd" class="javax.swing.JTextField" binding="programingField">
                         <constraints>
                           <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -425,7 +425,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="3734e" class="javax.swing.JTextField" binding="HistoryField">
+                      <component id="3734e" class="javax.swing.JTextField" binding="historyField">
                         <constraints>
                           <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -433,7 +433,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="b875d" class="javax.swing.JTextField" binding="PhysicsField">
+                      <component id="b875d" class="javax.swing.JTextField" binding="physicsField">
                         <constraints>
                           <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -441,7 +441,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="2a59c" class="javax.swing.JTextField" binding="SetIDField">
+                      <component id="2a59c" class="javax.swing.JTextField" binding="setIDField">
                         <constraints>
                           <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -460,18 +460,38 @@
                       </component>
                     </children>
                   </grid>
-                  <vspacer id="3a2dd">
+                  <component id="1827e" class="javax.swing.JList" binding="list1" default-binding="true">
                     <constraints>
-                      <grid row="1" column="1" row-span="2" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="50"/>
+                      </grid>
                     </constraints>
-                  </vspacer>
-                  <component id="6b45c" class="javax.swing.JButton" binding="createButtonButton">
+                    <properties/>
+                  </component>
+                  <component id="61ea9" class="javax.swing.JButton" binding="deleteButton" default-binding="true">
                     <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="Create"/>
+                      <text value="DeleteById"/>
                     </properties>
+                  </component>
+                  <component id="1a70d" class="javax.swing.JLabel" binding="iformation">
+                    <constraints>
+                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font size="20"/>
+                      <text value="Information about operations:"/>
+                    </properties>
+                  </component>
+                  <component id="73a94" class="javax.swing.JTextField" binding="setOperationIformation">
+                    <constraints>
+                      <grid row="2" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
                   </component>
                   <component id="e612c" class="javax.swing.JButton" binding="updateButtonButton">
                     <constraints>
@@ -481,12 +501,12 @@
                       <text value="Update"/>
                     </properties>
                   </component>
-                  <component id="61ea9" class="javax.swing.JButton" binding="deleteButton" default-binding="true">
+                  <component id="6b45c" class="javax.swing.JButton" binding="createButtonButton">
                     <constraints>
-                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="Delete"/>
+                      <text value="Create"/>
                     </properties>
                   </component>
                   <component id="9922b" class="javax.swing.JButton" binding="deleteAllButton" default-binding="true">
@@ -495,22 +515,6 @@
                     </constraints>
                     <properties>
                       <text value="DeleteAll"/>
-                    </properties>
-                  </component>
-                  <component id="1827e" class="javax.swing.JList" binding="list1" default-binding="true">
-                    <constraints>
-                      <grid row="0" column="2" row-span="6" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="50"/>
-                      </grid>
-                    </constraints>
-                    <properties/>
-                  </component>
-                  <component id="fa5d9" class="javax.swing.JButton" default-binding="true">
-                    <constraints>
-                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="FingById"/>
                     </properties>
                   </component>
                 </children>

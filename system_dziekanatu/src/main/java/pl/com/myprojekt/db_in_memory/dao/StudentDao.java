@@ -24,9 +24,10 @@ public class StudentDao {
         return db.update(studentUITM);
     }
 
-    public void delete(String id) {
-        db.delete(id);
+    public String delete(String id) {
+        return db.delete(id);
     }
+    public String deleteAll() {return db.deleteAll(); }
 
 
 }

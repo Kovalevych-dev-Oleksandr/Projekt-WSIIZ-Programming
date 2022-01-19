@@ -2,18 +2,23 @@ package pl.com.myprojekt.db_in_memory.db;
 
 import pl.com.myprojekt.db_in_memory.entity.StudentUITM;
 
+import java.util.Arrays;
 import java.util.Objects;
-import java.util.UUID;
 
 public class StudentDB {
     private static final int START_ARRAY_SIZE = 30;
     private static final int NUMBER_STUDENT_ID = 6;
+    private static final int MINIMAL_STUDENT_YEAR = 2004;
+    private static final int MAX_STUDENT_YEAR = 1920;
     private static StudentUITM[] students = new StudentUITM[START_ARRAY_SIZE];
 
     public String create(final StudentUITM studentUITM) {
 
         if (existId(studentUITM.getId())) {
             return "This id already used or you enter not student id, please enter other id";
+        }
+        if(!isYearStudent(studentUITM.getYearOfBirth())){
+            return "Student can`t have this year of birth";
         }
         boolean dataRecordingCapability = false;
         for (int i = 0; i < students.length; i++) {
@@ -36,6 +41,11 @@ public class StudentDB {
         students[students.length] = studentUITM;
     }
 
+    public String deleteAll() {
+        Arrays.fill(students, null);
+        return "All Student were delete";
+    }
+
     public String update(StudentUITM studentUITM) {//worker
         StudentUITM current = this.findById(studentUITM.getId());
         if (current != null) {
@@ -44,11 +54,16 @@ public class StudentDB {
             current.setYearOfBirth(studentUITM.getYearOfBirth());
             current.setGradesForTheExam(studentUITM.getGradesForTheExam());
             return "Student was update";
-        }else {
+        } else {
             return "we dont have student with this id";
         }
     }
-
+    private Boolean isYearStudent(int year){
+        if(year>MINIMAL_STUDENT_YEAR||year<MAX_STUDENT_YEAR){
+            return false;
+        }
+        return true;
+    }
     public StudentUITM findById(final String id) {
         int i;
         for (i = 0; i < students.length; i++) {
@@ -76,21 +91,25 @@ public class StudentDB {
     }
 
 
-    public void delete(final String id) {
+    public String delete(String id) {
         int studentDeletePoint = 0;
+        boolean studentExist = false;
         for (int i = 0; i < students.length; i++) {
             if (null != students[i] && id.equals(students[i].getId())) {
                 students[i] = null;
                 studentDeletePoint = i;
-                break;
+                studentExist = true;
             }
         }
-        final StudentUITM[] newArray = new StudentUITM[students.length];
+        if (studentExist) {
+            final StudentUITM[] newArray = new StudentUITM[students.length];
+            System.arraycopy(students, 0, newArray, 0, studentDeletePoint);
+            System.arraycopy(students, studentDeletePoint + 1, newArray, studentDeletePoint, students.length - (studentDeletePoint + 1));
+            students = newArray;
+            return "Student was delete";
 
-        System.arraycopy(students, 0, newArray, 0, studentDeletePoint);
-        System.arraycopy(students, studentDeletePoint + 1, newArray, studentDeletePoint, students.length - (studentDeletePoint + 1));
-        students = newArray;
-
+        }
+        return  "we dont have student with this id";
     }
 
 
@@ -121,4 +140,4 @@ public class StudentDB {
         return UUID.randomUUID().toString();
     }*/
 
-    }
+}
