@@ -13,8 +13,8 @@ public class StudentService {
         this.studentDao = studentDao;
     }
 
-    public void create(StudentUITM studentUITM) {
-        studentDao.create(studentUITM);
+    public String create(StudentUITM studentUITM) {
+        return studentDao.create(studentUITM);
     }
 
     public StudentUITM findById(String id) {

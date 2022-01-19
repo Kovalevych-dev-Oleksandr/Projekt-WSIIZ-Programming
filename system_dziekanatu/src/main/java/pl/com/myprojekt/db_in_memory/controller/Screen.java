@@ -126,7 +126,9 @@ public class Screen extends JFrame {
                         SetIDField.getText(),
                         new String[]{SetMathField.getText(), SetEnglishField.getText(), SetProgramingField.getText(), SetHistoryField.getText(), SetPhysicsField.getText()}
                 );
-                addStudent(studentUITM);
+                clear();
+                SetIDField.setText(addStudent(studentUITM));
+
             }
         });
 
@@ -164,10 +166,11 @@ public class Screen extends JFrame {
         });
     }
 
-    public static void addStudent(StudentUITM studentUITM) {
-        studentService.create(studentUITM);
+    public static String addStudent(StudentUITM studentUITM) {
+        String result = studentService.create(studentUITM);
         students = Arrays.asList(studentService.findAll());
         refreshArray();
+        return result;
     }
 
     private static void refreshArray() {
@@ -178,5 +181,16 @@ public class Screen extends JFrame {
         }
     }
 
+    private void clear() {
+        SetYearFild.setText("");
+        SetNameField.setText("");
+        SetSurnameFild.setText("");
+        SetIDField.setText("");
+        SetMathField.setText("");
+        SetEnglishField.setText("");
+        SetProgramingField.setText("");
+        SetHistoryField.setText("");
+        SetPhysicsField.setText("");
+    }
 
 }

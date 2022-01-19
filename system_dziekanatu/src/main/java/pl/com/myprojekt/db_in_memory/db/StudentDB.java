@@ -7,12 +7,14 @@ import java.util.UUID;
 
 public class StudentDB {
     private static final int START_ARRAY_SIZE = 30;
+    private static final int NUMBER_STUDENT_ID = 6;
     private static StudentUITM[] students = new StudentUITM[START_ARRAY_SIZE];
-   /* private StudentDB instants =new StudentDB();
 
-    private StudentDB(){}*/
+    public String create(final StudentUITM studentUITM) {
 
-    public void create(final StudentUITM studentUITM) {
+        if (existId(studentUITM.getId())) {
+            return "This id already used or you enter not student id, please enter other id";
+        }
         boolean dataRecordingCapability = false;
         for (int i = 0; i < students.length; i++) {
             if (students[i] == null) {
@@ -21,10 +23,10 @@ public class StudentDB {
                 break;
             }
         }
-        if (dataRecordingCapability) {
-            return;
+        if (!dataRecordingCapability) {
+            this.increasingArray(studentUITM);
         }
-        this.increasingArray(studentUITM);
+        return "Student create";
     }
 
     private void increasingArray(StudentUITM studentUITM) {
@@ -89,26 +91,31 @@ public class StudentDB {
     }
 
 
-    private String generateId() {
+  /*  private String generateId() {
         String id;
         do {
             id = this.generateStringUUID();
         } while (this.existId(id));
         return id;
-    }
+    }*/
 
     private boolean existId(final String id) {
+
         for (final StudentUITM studentUITM : students) {
             if (null == studentUITM) break;
             if (id.equals(studentUITM.getId())) {
                 return true;
             }
+            if (studentUITM.getId().length() == NUMBER_STUDENT_ID) {
+                return true;
+            }
+
         }
         return false;
     }
 
-    private String generateStringUUID() {
+  /*  private String generateStringUUID() {
         return UUID.randomUUID().toString();
-    }
+    }*/
 
-}
+    }
