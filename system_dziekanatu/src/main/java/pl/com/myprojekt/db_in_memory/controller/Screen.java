@@ -1,6 +1,5 @@
 package pl.com.myprojekt.db_in_memory.controller;
 
-import pl.com.myprojekt.JMenuTest;
 import pl.com.myprojekt.db_in_memory.dao.StudentDao;
 import pl.com.myprojekt.db_in_memory.db.StudentDB;
 import pl.com.myprojekt.db_in_memory.entity.ExamsName;
@@ -46,6 +45,23 @@ public class Screen extends JFrame {
     private JLabel labelId;
     private JTabbedPane CrudLeble;
     private JPanel panelTop;
+    private JTextField SetIDField;
+    private JTextField SetNameField;
+    private JTextField SetSurnameFild;
+    private JTextField SetYearFild;
+    private JTextField MathField;
+    private JTextField EnglishField;
+    private JTextField ProgramingField;
+    private JTextField HistoryField;
+    private JTextField PhysicsField;
+    private JButton deleteButton;
+    private JButton deleteAllButton;
+    private JList list1;
+    private JTextField SetMathField;
+    private JTextField SetEnglishField;
+    private JTextField SetProgramingField;
+    private JTextField SetHistoryField;
+    private JTextField SetPhysicsField;
     private static StudentService studentService = new StudentService(new StudentDao(new StudentDB()));
     private static List<StudentUITM> students;
     private static DefaultListModel listStudentModel;
@@ -60,6 +76,7 @@ public class Screen extends JFrame {
         students = new ArrayList<StudentUITM>();
         listStudentModel = new DefaultListModel();
         listStudents.setModel(listStudentModel);
+        list1.setModel(listStudentModel);
         createButtonButton.setEnabled(false);
 
         listStudents.addListSelectionListener(new ListSelectionListener() {
@@ -86,8 +103,6 @@ public class Screen extends JFrame {
                     textDateOfBirth.setText(String.valueOf(studentUITM.getYearOfBirth()));
                     textAge.setText(String.valueOf(studentService.studentsYear(studentUITM)));
                     createButtonButton.setEnabled(true);
-                } else {
-                    createButtonButton.setEnabled(false);
                 }
             }
         });
@@ -96,14 +111,15 @@ public class Screen extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 StudentUITM studentUITM = new StudentUITM(
-                        Integer.parseInt(textDateOfBirth.getText()),
-                        textName.getText(), textSurname.getText(),
-                        textId.getText(),
-                        new String[]{textMath.getText(), textEnglish.getText(), textPrograming.getText(), textHistory.getText(), textPhysics.getText()}
+                        Integer.parseInt(SetYearFild.getText()),
+                        SetNameField.getText(), textSurname.getText(),
+                        SetIDField.getText(),
+                        new String[]{SetMathField.getText(), SetEnglishField.getText(), SetProgramingField.getText(), SetHistoryField.getText(), SetPhysicsField.getText()}
                 );
                 addStudent(studentUITM);
             }
         });
+
         updateButtonButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -118,6 +134,12 @@ public class Screen extends JFrame {
                     studentService.update(studentUITM);
                     refreshArray();
                 }
+            }
+        });
+        list1.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+
             }
         });
     }
