@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Screen extends JFrame {
@@ -67,6 +68,7 @@ public class Screen extends JFrame {
     private JPanel iformations;
     private JLabel iformation;
     private JTextField setOperationIformation;
+    private JScrollBar scrollBar1;
     private static StudentService studentService = new StudentService(new StudentDao(new StudentDB()));
     private static List<StudentUITM> students;
     private static DefaultListModel listStudentModel;
@@ -115,6 +117,7 @@ public class Screen extends JFrame {
                     textDateOfBirth.setText(String.valueOf(studentUITM.getYearOfBirth()));
                     textAge.setText(String.valueOf(studentService.studentsYear(studentUITM)));
                     createButtonButton.setEnabled(true);
+
                 }
             }
         });
@@ -126,7 +129,6 @@ public class Screen extends JFrame {
                         Integer.parseInt(setYearFild.getText()),
                         setNameField.getText(),
                         setSurnameFild.getText(),
-                        setIDField.getText(),
                         new int[]{
                                 Integer.parseInt(setMathField.getText()),
                                 Integer.parseInt(setEnglishField.getText()),
@@ -193,12 +195,15 @@ public class Screen extends JFrame {
     private static void refreshArray() {
         students = Arrays.asList(studentService.findAll());
         listStudentModel.removeAllElements();
-        for (int i = 0; i < students.size(); i++) {
-            System.out.println(students.get(i).getId());
-            listStudentModel.addElement(students.get(i).getId());
+        for (StudentUITM student : students) {
+            System.out.println(student.getId());
+            listStudentModel.addElement(student.getName()+""+student.getSurname());
         }
     }
+private void sortByLetter (){
 
+
+}
     private void clear() {
         setYearFild.setText("");
         setNameField.setText("");
@@ -209,6 +214,22 @@ public class Screen extends JFrame {
         setProgramingField.setText("");
         setHistoryField.setText("");
         setPhysicsField.setText("");
+    }
+    public  static void startCreate() {
+        StudentUITM[] array = new StudentUITM[6];
+        StudentUITM studentUITM = new StudentUITM(2003, "Oleksandr", "Kovalevych",  new int[]{5, 5, 5, 5, 5});
+        StudentUITM studentUITM2 = new StudentUITM(2004, "Silvester", "Stallone",  new int[]{3, 4, 5, 2, 5});
+        StudentUITM studentUITM3 = new StudentUITM(2000, "Piotr", "Paschal",  new int[]{5, 2, 5, 4, 5});
+        StudentUITM studentUITM4 = new StudentUITM(2000, "Egor", "Wasserman",  new int[]{1, 4, 5, 5, 4});
+        StudentUITM studentUITM5 = new StudentUITM(1999, "Liza", "Block", new int[]{2, 4, 5, 2, 3});
+        StudentUITM studentUITM6 = new StudentUITM(2000, "Betta", "Frac",  new int[]{3, 3, 5, 1, 2});
+        array[0] = studentUITM;
+        array[1] = studentUITM2;
+        array[2] = studentUITM3;
+        array[3] = studentUITM4;
+        array[4] = studentUITM5;
+        array[5] = studentUITM6;
+        for (StudentUITM item : array) update(item);refreshArray();
     }
 
 }

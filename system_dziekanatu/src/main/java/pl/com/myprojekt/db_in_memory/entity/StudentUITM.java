@@ -10,11 +10,10 @@ public class StudentUITM extends BaseEntity {
     public static final int SIZE_ARRAY_GRADES = 5;
 
     public StudentUITM(){}
-    public StudentUITM(int yearOfBirth,String name,String surname,String id,int[] gradesForTheExam){
+    public StudentUITM(int yearOfBirth,String name,String surname,int[] gradesForTheExam){
         this.yearOfBirth=yearOfBirth;
         this.name=name;
         this.surname=surname;
-        super.setId(id);
         this.gradesForTheExam=gradesForTheExam;
     }
     public int getYearOfBirth() {

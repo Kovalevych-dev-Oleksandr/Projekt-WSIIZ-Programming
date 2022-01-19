@@ -4,6 +4,7 @@ import pl.com.myprojekt.db_in_memory.entity.StudentUITM;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.UUID;
 
 public class StudentDB {
     private static final int START_ARRAY_SIZE = 30;
@@ -14,12 +15,11 @@ public class StudentDB {
 
     public String create(final StudentUITM studentUITM) {
 
-        if (existId(studentUITM.getId())) {
-            return "This id already used or you enter not student id, please enter other id";
-        }
+       studentUITM.setId(generateId());
         if(!isYearStudent(studentUITM.getYearOfBirth())){
             return "Student can`t have this year of birth";
         }
+
         boolean dataRecordingCapability = false;
         for (int i = 0; i < students.length; i++) {
             if (students[i] == null) {
@@ -113,13 +113,13 @@ public class StudentDB {
     }
 
 
-  /*  private String generateId() {
+   private String generateId() {
         String id;
         do {
             id = this.generateStringUUID();
         } while (this.existId(id));
         return id;
-    }*/
+    }
 
     private boolean existId(final String id) {
 
@@ -128,16 +128,17 @@ public class StudentDB {
             if (id.equals(studentUITM.getId())) {
                 return true;
             }
-            if (studentUITM.getId().length() == NUMBER_STUDENT_ID) {
+            /*if (studentUITM.getId().length() == NUMBER_STUDENT_ID) {
                 return true;
-            }
+            }*/
 
         }
         return false;
     }
 
-  /*  private String generateStringUUID() {
-        return UUID.randomUUID().toString();
-    }*/
+    private String generateStringUUID() {
+        String[] id=UUID.randomUUID().toString().split("-");
+        return id[0];
+    }
 
 }
