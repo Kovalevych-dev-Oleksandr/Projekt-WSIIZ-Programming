@@ -9,7 +9,11 @@ import pl.com.myprojekt.db_in_memory.service.StudentService;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.text.StyleContext;
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Screen extends JFrame {
     private JTextField textName;
@@ -24,7 +28,7 @@ public class Screen extends JFrame {
     private JPanel penelTop;
     private JPanel panelLeft;
     private JPanel panelRight;
-    private JPanel mainPanel;
+    private JPanel MainPanel;
     private JTextField textAge;
     private JTextField textMath;
     private JTextField textEnglish;
@@ -44,7 +48,7 @@ public class Screen extends JFrame {
     public Screen(String title) {
         super(title);
 
-        this.setContentPane(mainPanel);
+        this.setContentPane(this.MainPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         students = new ArrayList<StudentUITM>();
@@ -58,7 +62,7 @@ public class Screen extends JFrame {
                 int selectionNumber = listStudents.getSelectedIndex();
                 if (selectionNumber >= 0) {
                     StudentUITM studentUITM = students.get(selectionNumber);
-                    String[] array=studentUITM.getGradesForTheExam();
+                    String[] array = studentUITM.getGradesForTheExam();
                     textName.setText(studentUITM.getName());
                     textGrades.setText(String.valueOf(studentService.ratingCalculation(studentUITM)));
                     textMath.setText(array[0]);
@@ -92,4 +96,6 @@ public class Screen extends JFrame {
             listStudentModel.addElement(students.get(i).getId());
         }
     }
+
+
 }
