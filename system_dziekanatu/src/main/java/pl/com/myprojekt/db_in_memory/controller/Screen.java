@@ -26,9 +26,8 @@ public class Screen extends JFrame {
     private JLabel birthLable;
     private JLabel examLable;
     private JList listStudents;
-    private JPanel penelTop;
+    private JPanel penelRight;
     private JPanel panelLeft;
-    private JPanel panelRight;
     private JPanel MainPanel;
     private JTextField textAge;
     private JTextField textMath;
@@ -45,6 +44,8 @@ public class Screen extends JFrame {
     private JButton updateButtonButton;
     private JTextField textId;
     private JLabel labelId;
+    private JTabbedPane CrudLeble;
+    private JPanel panelTop;
     private static StudentService studentService = new StudentService(new StudentDao(new StudentDB()));
     private static List<StudentUITM> students;
     private static DefaultListModel listStudentModel;
@@ -93,14 +94,14 @@ public class Screen extends JFrame {
         createButtonButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JMenuTest jMenuTest=new JMenuTest();
-               /* StudentUITM studentUITM = new StudentUITM(
+
+                StudentUITM studentUITM = new StudentUITM(
                         Integer.parseInt(textDateOfBirth.getText()),
                         textName.getText(), textSurname.getText(),
                         textId.getText(),
                         new String[]{textMath.getText(), textEnglish.getText(), textPrograming.getText(), textHistory.getText(), textPhysics.getText()}
                 );
-                addStudent(studentUITM);*/
+                addStudent(studentUITM);
             }
         });
         updateButtonButton.addActionListener(new ActionListener() {
