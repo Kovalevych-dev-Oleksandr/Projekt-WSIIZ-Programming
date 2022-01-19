@@ -62,6 +62,8 @@ public class Screen extends JFrame {
     private JTextField SetProgramingField;
     private JTextField SetHistoryField;
     private JTextField SetPhysicsField;
+    private JPanel Iformations;
+    private JPanel CRUD;
     private static StudentService studentService = new StudentService(new StudentDao(new StudentDB()));
     private static List<StudentUITM> students;
     private static DefaultListModel listStudentModel;
@@ -77,7 +79,13 @@ public class Screen extends JFrame {
         listStudentModel = new DefaultListModel();
         listStudents.setModel(listStudentModel);
         list1.setModel(listStudentModel);
-        createButtonButton.setEnabled(false);
+        createButtonButton.setEnabled(true);
+
+        MathField.setText(ExamsName.getFirstExam());
+        EnglishField.setText(ExamsName.getSecondExam());
+        ProgramingField.setText(ExamsName.getThreadExam());
+        HistoryField.setText(ExamsName.getForthExam());
+        PhysicsField.setText(ExamsName.getFifthExam());
 
         listStudents.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -112,7 +120,8 @@ public class Screen extends JFrame {
 
                 StudentUITM studentUITM = new StudentUITM(
                         Integer.parseInt(SetYearFild.getText()),
-                        SetNameField.getText(), textSurname.getText(),
+                        SetNameField.getText(),
+                        SetSurnameFild.getText(),
                         SetIDField.getText(),
                         new String[]{SetMathField.getText(), SetEnglishField.getText(), SetProgramingField.getText(), SetHistoryField.getText(), SetPhysicsField.getText()}
                 );
@@ -139,6 +148,12 @@ public class Screen extends JFrame {
         list1.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
+
+            }
+        });
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
             }
         });
