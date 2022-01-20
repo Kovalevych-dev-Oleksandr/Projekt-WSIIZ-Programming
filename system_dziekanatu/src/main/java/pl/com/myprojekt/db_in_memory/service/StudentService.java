@@ -25,7 +25,9 @@ public class StudentService {
         return studentDao.findAll();
     }
 
-    public String update(StudentUITM studentUITM) {return studentDao.update(studentUITM); }
+    public String update(StudentUITM studentUITM) {
+        return studentDao.update(studentUITM);
+    }
 
     public String delete(String id) {
         return studentDao.delete(id);
@@ -36,41 +38,54 @@ public class StudentService {
         studentUITM.setYearOfBirth(studentsYear(studentUITM));
         return studentUITM;
     }
-    public String deleteAll() {return studentDao.deleteAll(); }
+
+    public String deleteAll() {
+        return studentDao.deleteAll();
+    }
 
 
+    public int numberStudentsWhitsMark(int mark) {
+        StudentUITM[] array = studentDao.findAll();
+        int result = 0;
+        for (StudentUITM studentUITM : array) {
+            if (ratingCalculation(studentUITM) == mark) {
+                result++;
+            }
+        }
+        return result;
+    }
 
-    public  int studentsYear(StudentUITM studentUITM) {
+    public int studentsYear(StudentUITM studentUITM) {
         return Calendar.getInstance().get(Calendar.YEAR) - studentUITM.getYearOfBirth();
     }
 
-  /*  public StudentUITM[] highRatingOfRatings() {
-        StudentUITM[] studentsUITM = studentDao.findAll();
-        for (int i = 0; i < studentsUITM.length; i++) {
-            studentsUITM[i] = ratingCalculation(studentsUITM[i]);
-        }
-        return studentsUITM;
-    }
+    /*  public StudentUITM[] highRatingOfRatings() {
+          StudentUITM[] studentsUITM = studentDao.findAll();
+          for (int i = 0; i < studentsUITM.length; i++) {
+              studentsUITM[i] = ratingCalculation(studentsUITM[i]);
+          }
+          return studentsUITM;
+      }
 
-    private StudentUITM ratingCalculation(StudentUITM studentUITM) {
-        int result = 0;
-        String[][] bufferArray = studentUITM.getGradesForTheExam();
-        for (int i = 0; i < StudentUITM.SIZE_ARRAY_GRADES; i++) {
-            result = result + Integer.parseInt(bufferArray[i][0]);
-        }
-        if (result / StudentUITM.SIZE_ARRAY_GRADES < 4) {
-            studentUITM = null;
-        }
-        return studentUITM;
-    }*/
+      private StudentUITM ratingCalculation(StudentUITM studentUITM) {
+          int result = 0;
+          String[][] bufferArray = studentUITM.getGradesForTheExam();
+          for (int i = 0; i < StudentUITM.SIZE_ARRAY_GRADES; i++) {
+              result = result + Integer.parseInt(bufferArray[i][0]);
+          }
+          if (result / StudentUITM.SIZE_ARRAY_GRADES < 4) {
+              studentUITM = null;
+          }
+          return studentUITM;
+      }*/
     public int ratingCalculation(StudentUITM studentUITM) {
         int result = 0;
         int[] bufferArray = studentUITM.getGradesForTheExam();
         for (int i = 0; i < StudentUITM.SIZE_ARRAY_GRADES; i++) {
-            result = result +bufferArray[i];
+            result = result + bufferArray[i];
         }
 
-        return result/StudentUITM.SIZE_ARRAY_GRADES;
+        return result / StudentUITM.SIZE_ARRAY_GRADES;
     }
 
 

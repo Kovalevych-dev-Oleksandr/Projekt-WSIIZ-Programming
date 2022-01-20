@@ -13,7 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class Screen extends JFrame {
@@ -68,24 +67,43 @@ public class Screen extends JFrame {
     private JPanel iformations;
     private JLabel iformation;
     private JTextField setOperationIformation;
-    private JScrollBar scrollBar1;
+    private JLabel dUITM;
+    private JRadioButton radioButtonOne;
+    private JRadioButton radioButtonTwo;
+    private JRadioButton radioButtonTree;
+    private JRadioButton radioButtonFour;
+    private JRadioButton radioButtonFive;
+    private JPanel panelTree;
+    private JTextField averageResult1;
+    private JTextField averageResult2;
+    private JTextField averageResult3;
+    private JTextField averageResult4;
+    private JTextField averageResult5;
     private static StudentService studentService = new StudentService(new StudentDao(new StudentDB()));
     private static List<StudentUITM> students;
     private static DefaultListModel listStudentModel;
 
 
     public Screen(String title) {
+
         super(title);
 
         this.setContentPane(this.MainPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
+
         students = new ArrayList<StudentUITM>();
         listStudentModel = new DefaultListModel();
         listStudents.setModel(listStudentModel);
         list1.setModel(listStudentModel);
         createButtonButton.setEnabled(true);
         updateButtonButton.setEnabled(true);
+
+        radioButtonOne.setSelected(false);
+        radioButtonTwo.setSelected(false);
+        radioButtonTree.setSelected(false);
+        radioButtonFour.setSelected(false);
+        radioButtonFive.setSelected(false);
 
         mathField.setText(ExamsName.getFirstExam());
         englishField.setText(ExamsName.getSecondExam());
@@ -184,8 +202,40 @@ public class Screen extends JFrame {
                 refreshArray();
             }
         });
-    }
+        radioButtonOne.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+                averageResult1.setText(String.valueOf( studentService.numberStudentsWhitsMark(1)));
+            }
+        });
+        radioButtonTwo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                averageResult2.setText(String.valueOf( studentService.numberStudentsWhitsMark(2)));
+            }
+        });
+        radioButtonTree.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                averageResult3.setText(String.valueOf( studentService.numberStudentsWhitsMark(3)));
+            }
+        });
+        radioButtonFour.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                averageResult4.setText(String.valueOf( studentService.numberStudentsWhitsMark(4)));
+            }
+        });
+        radioButtonFive.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                    averageResult5.setText(String.valueOf( studentService.numberStudentsWhitsMark(5)));
+
+            }
+        });
+    }
     public static String update(StudentUITM studentUITM) {
         String result = studentService.create(studentUITM);
         refreshArray();
@@ -197,13 +247,15 @@ public class Screen extends JFrame {
         listStudentModel.removeAllElements();
         for (StudentUITM student : students) {
             System.out.println(student.getId());
-            listStudentModel.addElement(student.getName()+""+student.getSurname());
+            listStudentModel.addElement(student.getName() + " " + student.getSurname());
         }
     }
-private void sortByLetter (){
+
+    private void sortByLetter() {
 
 
-}
+    }
+
     private void clear() {
         setYearFild.setText("");
         setNameField.setText("");
@@ -215,21 +267,23 @@ private void sortByLetter (){
         setHistoryField.setText("");
         setPhysicsField.setText("");
     }
-    public  static void startCreate() {
+
+    public static void startCreate() {
         StudentUITM[] array = new StudentUITM[6];
-        StudentUITM studentUITM = new StudentUITM(2003, "Oleksandr", "Kovalevych",  new int[]{5, 5, 5, 5, 5});
-        StudentUITM studentUITM2 = new StudentUITM(2004, "Silvester", "Stallone",  new int[]{3, 4, 5, 2, 5});
-        StudentUITM studentUITM3 = new StudentUITM(2000, "Piotr", "Paschal",  new int[]{5, 2, 5, 4, 5});
-        StudentUITM studentUITM4 = new StudentUITM(2000, "Egor", "Wasserman",  new int[]{1, 4, 5, 5, 4});
+        StudentUITM studentUITM = new StudentUITM(2003, "Oleksandr", "Kovalevych", new int[]{5, 5, 5, 5, 5});
+        StudentUITM studentUITM2 = new StudentUITM(2004, "Silvester", "Stallone", new int[]{3, 4, 5, 2, 5});
+        StudentUITM studentUITM3 = new StudentUITM(2000, "Piotr", "Paschal", new int[]{5, 2, 5, 4, 5});
+        StudentUITM studentUITM4 = new StudentUITM(2000, "Egor", "Wasserman", new int[]{1, 4, 5, 5, 4});
         StudentUITM studentUITM5 = new StudentUITM(1999, "Liza", "Block", new int[]{2, 4, 5, 2, 3});
-        StudentUITM studentUITM6 = new StudentUITM(2000, "Betta", "Frac",  new int[]{3, 3, 5, 1, 2});
+        StudentUITM studentUITM6 = new StudentUITM(2000, "Betta", "Frac", new int[]{3, 3, 5, 1, 2});
         array[0] = studentUITM;
         array[1] = studentUITM2;
         array[2] = studentUITM3;
         array[3] = studentUITM4;
         array[4] = studentUITM5;
         array[5] = studentUITM6;
-        for (StudentUITM item : array) update(item);refreshArray();
+        for (StudentUITM item : array) update(item);
+        refreshArray();
     }
 
 }

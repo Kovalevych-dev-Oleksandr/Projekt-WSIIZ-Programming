@@ -11,15 +11,19 @@ public class StudentDB {
     private static final int NUMBER_STUDENT_ID = 6;
     private static final int MINIMAL_STUDENT_YEAR = 2004;
     private static final int MAX_STUDENT_YEAR = 1920;
+    private static final int MAX_MARK = 5;
+    private static final int MIN_MARK = 1;
     private static StudentUITM[] students = new StudentUITM[START_ARRAY_SIZE];
 
     public String create(final StudentUITM studentUITM) {
 
-       studentUITM.setId(generateId());
-        if(!isYearStudent(studentUITM.getYearOfBirth())){
+        studentUITM.setId(generateId());
+        if (!isYearStudent(studentUITM.getYearOfBirth())) {
             return "Student can`t have this year of birth";
         }
-
+        if(!checkMarks(studentUITM)){
+          return "Student cant have this marks";
+        }
         boolean dataRecordingCapability = false;
         for (int i = 0; i < students.length; i++) {
             if (students[i] == null) {
@@ -32,6 +36,16 @@ public class StudentDB {
             this.increasingArray(studentUITM);
         }
         return "Student create";
+    }
+
+    private boolean checkMarks(StudentUITM studentUITM) {
+        int[] array = studentUITM.getGradesForTheExam();
+        for (int j : array) {
+            if (j > MAX_MARK || j < MIN_MARK) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void increasingArray(StudentUITM studentUITM) {
@@ -58,12 +72,14 @@ public class StudentDB {
             return "we dont have student with this id";
         }
     }
-    private Boolean isYearStudent(int year){
-        if(year>MINIMAL_STUDENT_YEAR||year<MAX_STUDENT_YEAR){
+
+    private Boolean isYearStudent(int year) {
+        if (year > MINIMAL_STUDENT_YEAR || year < MAX_STUDENT_YEAR) {
             return false;
         }
         return true;
     }
+
     public StudentUITM findById(final String id) {
         int i;
         for (i = 0; i < students.length; i++) {
@@ -109,11 +125,11 @@ public class StudentDB {
             return "Student was delete";
 
         }
-        return  "we dont have student with this id";
+        return "we dont have student with this id";
     }
 
 
-   private String generateId() {
+    private String generateId() {
         String id;
         do {
             id = this.generateStringUUID();
@@ -137,7 +153,7 @@ public class StudentDB {
     }
 
     private String generateStringUUID() {
-        String[] id=UUID.randomUUID().toString().split("-");
+        String[] id = UUID.randomUUID().toString().split("-");
         return id[0];
     }
 
