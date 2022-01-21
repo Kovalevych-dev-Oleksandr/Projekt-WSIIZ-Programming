@@ -14,9 +14,6 @@ public class SystemDziekanatuMain {
         Screen screen = new Screen("Dean 's Office UITM");
         screen.setVisible(true);
        screen.startCreate();
-       screen.startCreate();
-       screen.startCreate();
-
     }
 
 
