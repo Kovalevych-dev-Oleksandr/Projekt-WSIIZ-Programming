@@ -72,7 +72,7 @@ public class StudentService {
     public StudentUITM[] highRatingOfRatings() {
         StudentUITM[] studentUITMS = studentDao.findAll();
         for (int i = 0; i < studentUITMS.length; i++) {
-            if (ratingCalculation(studentUITMS[i]) >= GOOD_MARK) {
+            if (ratingCalculation(studentUITMS[i]) < GOOD_MARK) {
                 studentUITMS[i] = null;
             }
         }
