@@ -2,6 +2,7 @@ package pl.com.myprojekt.db_in_memory.controller;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
 import pl.com.myprojekt.db_in_memory.dao.StudentDao;
 import pl.com.myprojekt.db_in_memory.db.StudentDB;
 import pl.com.myprojekt.db_in_memory.entity.ExamsName;
@@ -89,11 +90,13 @@ public class StudentControllerTrue extends JFrame {
     private JButton startButton;
     private JButton cancelButton;
     private JPanel StudentSort;
+    private JList list2;
     private static StudentService studentService = new StudentService(new StudentDao(new StudentDB()));
     private static List<StudentUITM> students;
     private static DefaultListModel listStudentModel;
     private static DefaultListModel listStudentModelSortiedByAge;
     private static DefaultListModel listStudentModelWithBestMark;
+    private static DefaultListModel listMarkModel;
 
 
     public StudentControllerTrue(String title) {
@@ -108,8 +111,10 @@ public class StudentControllerTrue extends JFrame {
         listStudentModel = new DefaultListModel();
         listStudentModelSortiedByAge = new DefaultListModel();
         listStudentModelWithBestMark = new DefaultListModel();
+        listMarkModel = new DefaultListModel();
         listStudents.setModel(listStudentModel);
         list1.setModel(listStudentModel);
+        list2.setModel(listMarkModel);
         listStudentSortedByAge.setModel(listStudentModelSortiedByAge);
         listStudentWithFour.setModel(listStudentModelWithBestMark);
 
@@ -248,6 +253,7 @@ public class StudentControllerTrue extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 averageResult1.setText(String.valueOf(studentService.numberStudentsWhitsMark(1)));
+                refreshList2(1);
                 clearUnActiveRadioButton(false, true, true, true, true);
             }
         });
@@ -255,6 +261,7 @@ public class StudentControllerTrue extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 averageResult2.setText(String.valueOf(studentService.numberStudentsWhitsMark(2)));
+                refreshList2(2);
                 clearUnActiveRadioButton(true, false, true, true, true);
 
             }
@@ -264,6 +271,7 @@ public class StudentControllerTrue extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 averageResult3.setText(String.valueOf(studentService.numberStudentsWhitsMark(3)));
+                refreshList2(3);
                 clearUnActiveRadioButton(true, true, false, true, true);
             }
         });
@@ -271,6 +279,7 @@ public class StudentControllerTrue extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 averageResult4.setText(String.valueOf(studentService.numberStudentsWhitsMark(4)));
+                refreshList2(4);
                 clearUnActiveRadioButton(true, true, true, false, true);
 
             }
@@ -280,6 +289,7 @@ public class StudentControllerTrue extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 averageResult5.setText(String.valueOf(studentService.numberStudentsWhitsMark(5)));
+                refreshList2(5);
                 clearUnActiveRadioButton(true, true, true, true, false);
 
             }
@@ -304,6 +314,7 @@ public class StudentControllerTrue extends JFrame {
                 createButtonButton.setEnabled(true);
                 deleteAllButton.setEnabled(true);
                 list1.setEnabled(true);
+                list2.setEnabled(true);
                 listStudents.setEnabled(true);
                 listStudentSortedByAge.setEnabled(true);
                 listStudentWithFour.setEnabled(true);
@@ -329,6 +340,18 @@ public class StudentControllerTrue extends JFrame {
         String result = studentService.create(studentUITM);
         refreshArray();
         return result;
+    }
+
+    public static void refreshList2(int mark) {
+        List<StudentUITM> list = studentService.nameStudentWithUserMark(mark);
+        listMarkModel.removeAllElements();
+        if (list.isEmpty()) {
+            listMarkModel.addElement("There is no student with such an assessment");
+        } else {
+            for (int i = 0; i < list.size(); i++) {
+                listMarkModel.addElement(list.get(i).getName() + " " + list.get(i).getSurname());
+            }
+        }
     }
 
     public static void refreshArray() {
@@ -429,7 +452,7 @@ public class StudentControllerTrue extends JFrame {
      */
     private void $$$setupUI$$$() {
         MainPanel = new JPanel();
-        MainPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        MainPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         AllStudentIformations = new JTabbedPane();
         AllStudentIformations.setEnabled(true);
         AllStudentIformations.setToolTipText("");
@@ -622,61 +645,70 @@ public class StudentControllerTrue extends JFrame {
         deleteAllButton.setText("DeleteAll");
         iformations.add(deleteAllButton, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         panelTree = new JPanel();
-        panelTree.setLayout(new GridLayoutManager(16, 2, new Insets(0, 0, 0, 0), -1, -1));
+        panelTree.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         panelTree.setToolTipText("");
         AllStudentIformations.addTab("Students with a given grade", panelTree);
+        final JPanel panel2 = new JPanel();
+        panel2.setLayout(new GridLayoutManager(17, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panelTree.add(panel2, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JLabel label6 = new JLabel();
-        Font label6Font = this.$$$getFont$$$(null, -1, 20, label6.getFont());
-        if (label6Font != null) label6.setFont(label6Font);
-        label6.setText("The number of students  according to the given rating");
-        panelTree.add(label6, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        averageResult2 = new JTextField();
-        panelTree.add(averageResult2, new GridConstraints(5, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        final JLabel label7 = new JLabel();
-        label7.setText("People with Average Mark:1");
-        panelTree.add(label7, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label8 = new JLabel();
-        label8.setText("People with Average Mark:2");
-        panelTree.add(label8, new GridConstraints(4, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label9 = new JLabel();
-        label9.setText("People with Average Mark:3");
-        panelTree.add(label9, new GridConstraints(7, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label10 = new JLabel();
-        label10.setText("People with Average Mark:4");
-        panelTree.add(label10, new GridConstraints(10, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label11 = new JLabel();
-        label11.setText("People with Average Mark:5");
-        panelTree.add(label11, new GridConstraints(13, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        averageResult4 = new JTextField();
-        panelTree.add(averageResult4, new GridConstraints(11, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        averageResult3 = new JTextField();
-        panelTree.add(averageResult3, new GridConstraints(8, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        averageResult5 = new JTextField();
-        panelTree.add(averageResult5, new GridConstraints(14, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        label6.setText("People with Average Mark:1");
+        panel2.add(label6, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final Spacer spacer1 = new Spacer();
+        panel2.add(spacer1, new GridConstraints(16, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         averageResult1 = new JTextField();
-        panelTree.add(averageResult1, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        panel2.add(averageResult1, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         radioButtonOne = new JRadioButton();
         radioButtonOne.setEnabled(false);
         radioButtonOne.setText("Assessment-1");
-        panelTree.add(radioButtonOne, new GridConstraints(3, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel2.add(radioButtonOne, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label7 = new JLabel();
+        label7.setText("People with Average Mark:2");
+        panel2.add(label7, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         radioButtonTwo = new JRadioButton();
         radioButtonTwo.setEnabled(false);
         radioButtonTwo.setText("Assessment-2");
-        panelTree.add(radioButtonTwo, new GridConstraints(6, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel2.add(radioButtonTwo, new GridConstraints(6, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label8 = new JLabel();
+        label8.setText("People with Average Mark:3");
+        panel2.add(label8, new GridConstraints(7, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        averageResult2 = new JTextField();
+        panel2.add(averageResult2, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        averageResult3 = new JTextField();
+        panel2.add(averageResult3, new GridConstraints(8, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         radioButtonTree = new JRadioButton();
         radioButtonTree.setEnabled(false);
         radioButtonTree.setText("Assessment-3");
-        panelTree.add(radioButtonTree, new GridConstraints(9, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel2.add(radioButtonTree, new GridConstraints(9, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label9 = new JLabel();
+        label9.setText("People with Average Mark:4");
+        panel2.add(label9, new GridConstraints(10, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        averageResult4 = new JTextField();
+        panel2.add(averageResult4, new GridConstraints(11, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         radioButtonFour = new JRadioButton();
         radioButtonFour.setEnabled(false);
         radioButtonFour.setText("Assessment-4");
-        panelTree.add(radioButtonFour, new GridConstraints(12, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel2.add(radioButtonFour, new GridConstraints(12, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label10 = new JLabel();
+        label10.setText("People with Average Mark:5");
+        panel2.add(label10, new GridConstraints(13, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        averageResult5 = new JTextField();
+        panel2.add(averageResult5, new GridConstraints(14, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         radioButtonFive = new JRadioButton();
+        radioButtonFive.setEnabled(false);
         radioButtonFive.setText("Assessment-5");
-        panelTree.add(radioButtonFive, new GridConstraints(15, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel2.add(radioButtonFive, new GridConstraints(15, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label11 = new JLabel();
+        Font label11Font = this.$$$getFont$$$(null, -1, 20, label11.getFont());
+        if (label11Font != null) label11.setFont(label11Font);
+        label11.setText("The number of students  according to the given rating");
+        panel2.add(label11, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        list2 = new JList();
+        list2.setEnabled(false);
+        panelTree.add(list2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
         StudentSort = new JPanel();
         StudentSort.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
-        AllStudentIformations.addTab("Untitled", StudentSort);
+        AllStudentIformations.addTab("Student Sort", StudentSort);
         final JLabel label12 = new JLabel();
         label12.setText("Students sorted by age");
         StudentSort.add(label12, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));

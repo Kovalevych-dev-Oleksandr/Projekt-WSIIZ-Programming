@@ -4,6 +4,7 @@ package pl.com.myprojekt.db_in_memory.service;
 import pl.com.myprojekt.db_in_memory.dao.StudentDao;
 import pl.com.myprojekt.db_in_memory.entity.StudentUITM;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
@@ -42,6 +43,17 @@ public class StudentService {
     }
 
 
+    public List<StudentUITM> nameStudentWithUserMark(int mark){
+        List<StudentUITM>student=Arrays.asList(studentDao.findAll());
+        List<StudentUITM>result=new ArrayList<>();
+
+        for(int i=0;i<student.size();i++){
+            if (ratingCalculation(student.get(i))==mark){
+                result.add(student.get(i));
+            }
+        }
+        return result;
+    }
     public int numberStudentsWhitsMark(int mark) {
         StudentUITM[] array = studentDao.findAll();
         int result = 0;
