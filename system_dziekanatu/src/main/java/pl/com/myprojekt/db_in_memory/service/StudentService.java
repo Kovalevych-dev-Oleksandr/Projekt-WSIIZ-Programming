@@ -4,9 +4,12 @@ package pl.com.myprojekt.db_in_memory.service;
 import pl.com.myprojekt.db_in_memory.dao.StudentDao;
 import pl.com.myprojekt.db_in_memory.entity.StudentUITM;
 
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 public class StudentService {
+    private static final int GOOD_MARK = 4;
     private final StudentDao studentDao;
 
     public StudentService(StudentDao studentDao) {
@@ -33,11 +36,6 @@ public class StudentService {
         return studentDao.delete(id);
     }
 
-    public StudentUITM BirthYearOfStudent(String id) {
-        StudentUITM studentUITM = studentDao.findById(id);
-        studentUITM.setYearOfBirth(studentsYear(studentUITM));
-        return studentUITM;
-    }
 
     public String deleteAll() {
         return studentDao.deleteAll();
@@ -59,25 +57,29 @@ public class StudentService {
         return Calendar.getInstance().get(Calendar.YEAR) - studentUITM.getYearOfBirth();
     }
 
-    /*  public StudentUITM[] highRatingOfRatings() {
-          StudentUITM[] studentsUITM = studentDao.findAll();
-          for (int i = 0; i < studentsUITM.length; i++) {
-              studentsUITM[i] = ratingCalculation(studentsUITM[i]);
-          }
-          return studentsUITM;
-      }
+    public StudentUITM[] highRatingOfRatings() {
+        StudentUITM[] studentUITMS=studentDao.findAll();
+            for (int i = 0; i < studentUITMS.length; i++) {
+                if (ratingCalculation(studentUITMS[i]) >= GOOD_MARK) {
+                    studentUITMS[i]=null;
+                }
+            }
 
-      private StudentUITM ratingCalculation(StudentUITM studentUITM) {
-          int result = 0;
-          String[][] bufferArray = studentUITM.getGradesForTheExam();
-          for (int i = 0; i < StudentUITM.SIZE_ARRAY_GRADES; i++) {
-              result = result + Integer.parseInt(bufferArray[i][0]);
-          }
-          if (result / StudentUITM.SIZE_ARRAY_GRADES < 4) {
-              studentUITM = null;
-          }
-          return studentUITM;
-      }*/
+            return studentUITMS;
+
+    }
+
+    /*  private StudentUITM ratingCalculation(StudentUITM studentUITM) {
+      int result = 0;
+      String[][] bufferArray = studentUITM.getGradesForTheExam();
+      for (int i = 0; i < StudentUITM.SIZE_ARRAY_GRADES; i++) {
+          result = result + Integer.parseInt(bufferArray[i][0]);
+      }
+      if (result / StudentUITM.SIZE_ARRAY_GRADES < 4) {
+          studentUITM = null;
+      }
+      return studentUITM;
+  }*/
     public int ratingCalculation(StudentUITM studentUITM) {
         int result = 0;
         int[] bufferArray = studentUITM.getGradesForTheExam();
@@ -91,13 +93,12 @@ public class StudentService {
 
     public StudentUITM[] studentSort() {
         StudentUITM[] studentsUITM = studentDao.findAll();
-        StudentUITM current;
         for (int i = 0; i < studentsUITM.length; i++) {
-            for (int j = 0; j < studentsUITM.length; j++) {
-                if (studentsUITM[i].getYearOfBirth() > studentsUITM[i].getYearOfBirth()) {
-                    current = studentsUITM[i + 1];
-                    studentsUITM[i] = studentsUITM[i + 1];
-                    studentsUITM[i] = current;
+            for (int j = 0; j < studentsUITM.length - 1; j++) {
+                if (studentsYear(studentsUITM[j]) < studentsYear(studentsUITM[j + 1])) {
+                    StudentUITM temp = studentsUITM[j];
+                    studentsUITM[j] = studentsUITM[j + 1];
+                    studentsUITM[j + 1] = temp;
                 }
             }
         }
