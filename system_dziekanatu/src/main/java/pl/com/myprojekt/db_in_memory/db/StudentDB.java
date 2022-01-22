@@ -21,8 +21,8 @@ public class StudentDB {
         if (!isYearStudent(studentUITM.getYearOfBirth())) {
             return "Student can`t have this year of birth";
         }
-        if(!checkMarks(studentUITM)){
-          return "Student cant have this marks";
+        if (!checkMarks(studentUITM)) {
+            return "Student cant have this marks";
         }
         boolean dataRecordingCapability = false;
         for (int i = 0; i < students.length; i++) {
@@ -153,8 +153,8 @@ public class StudentDB {
     }
 
     private String generateStringUUID() {
-        String[] id = UUID.randomUUID().toString().split("-");
-        return id[0];
+
+        return String.copyValueOf(UUID.randomUUID().toString().toCharArray(),0,6);
     }
 
 }

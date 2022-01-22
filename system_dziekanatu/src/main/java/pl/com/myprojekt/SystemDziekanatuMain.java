@@ -1,19 +1,10 @@
-
 package pl.com.myprojekt;
 
-import pl.com.myprojekt.db_in_memory.controller.StudentControllerTrue;
+import pl.com.myprojekt.run.ProgramRun;
 
 public class SystemDziekanatuMain {
     public static void main(String[] args) {
-
-        /*ProgramRun programRun= new ProgramRun();
-        programRun.run();*/
-        StudentControllerTrue studentControllerTrue = new StudentControllerTrue("Dean 's Office UITM");
-        studentControllerTrue.setVisible(true);
-       studentControllerTrue.startCreate();
-
+        ProgramRun programRun = new ProgramRun();
+        programRun.run();
     }
-
-
-    // В начале строки потом колонки
 }

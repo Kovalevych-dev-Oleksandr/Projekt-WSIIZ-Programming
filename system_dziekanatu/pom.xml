@@ -13,6 +13,8 @@
     <artifactId>system_dziekanatu</artifactId>
 
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.shade.plugin.version>3.2.0</maven.shade.plugin.version>
@@ -26,6 +28,7 @@
             <version>6.0.3</version>
         </dependency>
     </dependencies>
+
 
     <build>
         <finalName>system_dziekanatu</finalName>
@@ -42,22 +45,25 @@
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
-                <artifactId>ideauidesigner-maven-plugin</artifactId>
-                <version>1.0-beta-1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>javac2</goal>
-                        </goals>
-                    </execution>
-                </executions>
-
-                <configuration>
-                    <fork>true</fork>
-                    <debug>true</debug>
-                    <failOnError>true</failOnError>
-                </configuration>
-            </plugin>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2</version>
+            <executions>
+                <execution>
+                    <id>default-cli</id>
+                    <goals>
+                        <goal>exec</goal>
+                    </goals>
+                    <configuration>
+                        <executable>${java.home}/bin/java</executable>
+                    </configuration>
+                </execution>
+            </executions>
+            <configuration>
+                <fork>true</fork>
+                <debug>true</debug>
+                <failOnError>true</failOnError>
+            </configuration>
+        </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
