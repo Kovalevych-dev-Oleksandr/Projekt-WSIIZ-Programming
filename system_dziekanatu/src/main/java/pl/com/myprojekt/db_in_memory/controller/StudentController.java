@@ -98,16 +98,11 @@ public class StudentController extends JFrame {
     private static DefaultListModel listStudentModelWithBestMark;
     private static DefaultListModel listMarkModel;
 
-
     public StudentController(String title) {
-
         super(title);
-
         this.setContentPane(this.MainPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
-
-
         listStudentModel = new DefaultListModel();
         listStudentModelSortiedByAge = new DefaultListModel();
         listStudentModelWithBestMark = new DefaultListModel();
@@ -117,7 +112,6 @@ public class StudentController extends JFrame {
         list2.setModel(listMarkModel);
         listStudentSortedByAge.setModel(listStudentModelSortiedByAge);
         listStudentWithFour.setModel(listStudentModelWithBestMark);
-
 
         listStudents.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -211,11 +205,8 @@ public class StudentController extends JFrame {
                 refreshArray();
                 refreshArrayStudentSortedByMark();
                 refreshArrayStudentSortedByAge();
-
             }
         });
-
-
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -258,13 +249,11 @@ public class StudentController extends JFrame {
                 averageResult2.setText(String.valueOf(studentService.numberStudentsWhitsMark(2)));
                 refreshList2(2);
                 clearUnActiveRadioButton(true, false, true, true, true);
-
             }
         });
         radioButtonTree.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 averageResult3.setText(String.valueOf(studentService.numberStudentsWhitsMark(3)));
                 refreshList2(3);
                 clearUnActiveRadioButton(true, true, false, true, true);
@@ -276,23 +265,19 @@ public class StudentController extends JFrame {
                 averageResult4.setText(String.valueOf(studentService.numberStudentsWhitsMark(4)));
                 refreshList2(4);
                 clearUnActiveRadioButton(true, true, true, false, true);
-
             }
         });
         radioButtonFive.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 averageResult5.setText(String.valueOf(studentService.numberStudentsWhitsMark(5)));
                 refreshList2(5);
                 clearUnActiveRadioButton(true, true, true, true, false);
-
             }
         });
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 radioButtonOne.setSelected(false);
                 radioButtonOne.setEnabled(true);
                 radioButtonTwo.setSelected(false);
@@ -303,7 +288,6 @@ public class StudentController extends JFrame {
                 radioButtonFour.setEnabled(true);
                 radioButtonFive.setSelected(false);
                 radioButtonFive.setEnabled(true);
-
                 deleteButton.setEnabled(true);
                 updateButtonButton.setEnabled(true);
                 createButtonButton.setEnabled(true);
@@ -353,17 +337,14 @@ public class StudentController extends JFrame {
         students = Arrays.asList(studentService.findAll());
         listStudentModel.removeAllElements();
         for (StudentUITM student : students) {
-            System.out.println(student.getId());
             listStudentModel.addElement(student.getName() + " " + student.getSurname());
         }
-
     }
 
     private static void refreshArrayStudentSortedByAge() {
         List<StudentUITM> students = Arrays.asList(studentService.studentSort());
         listStudentModelSortiedByAge.removeAllElements();
         for (StudentUITM student : students) {
-            //System.out.println(student.getId());
             listStudentModelSortiedByAge.addElement(student.getName() + " " + student.getSurname());
         }
     }
@@ -372,7 +353,6 @@ public class StudentController extends JFrame {
         List<StudentUITM> buffer = Arrays.asList(studentService.highRatingOfRatings());
         listStudentModelWithBestMark.removeAllElements();
         for (int i = 0; i < buffer.size(); i++) {
-            //System.out.println(student.getId());
             if (buffer.get(i) != null) {
                 listStudentModelWithBestMark.addElement(buffer.get(i).getName() + " " + buffer.get(i).getSurname());
             }

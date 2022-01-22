@@ -7,8 +7,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class StudentDB {
+
     private static final int START_ARRAY_SIZE = 30;
-    private static final int NUMBER_STUDENT_ID = 6;
     private static final int MINIMAL_STUDENT_YEAR = 2004;
     private static final int MAX_STUDENT_YEAR = 1920;
     private static final int MAX_MARK = 5;
@@ -16,7 +16,6 @@ public class StudentDB {
     private static StudentUITM[] students = new StudentUITM[START_ARRAY_SIZE];
 
     public String create(final StudentUITM studentUITM) {
-
         studentUITM.setId(generateId());
         if (!isYearStudent(studentUITM.getYearOfBirth())) {
             return "Student can`t have this year of birth";
@@ -144,17 +143,12 @@ public class StudentDB {
             if (id.equals(studentUITM.getId())) {
                 return true;
             }
-            /*if (studentUITM.getId().length() == NUMBER_STUDENT_ID) {
-                return true;
-            }*/
-
         }
         return false;
     }
 
     private String generateStringUUID() {
-
-        return String.copyValueOf(UUID.randomUUID().toString().toCharArray(),0,6);
+        return String.copyValueOf(UUID.randomUUID().toString().toCharArray(), 0, 6);
     }
 
 }

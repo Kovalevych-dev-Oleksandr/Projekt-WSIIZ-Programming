@@ -2,12 +2,11 @@ package pl.com.myprojekt.db_in_memory.entity;
 
 public class ExamsName {
 
-
-    private static  String firstExam="Math";
-    private static  String secondExam="English";
-    private static  String threadExam ="Programing";
-    private static  String forthExam="History";
-    private static  String fifthExam="Physics";
+    private static String firstExam = "Math";
+    private static String secondExam = "English";
+    private static String threadExam = "Programing";
+    private static String forthExam = "History";
+    private static String fifthExam = "Physics";
 
     public static String getFirstExam() {
         return firstExam;
