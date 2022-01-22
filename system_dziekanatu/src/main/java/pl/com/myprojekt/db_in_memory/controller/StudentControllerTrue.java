@@ -2,7 +2,6 @@ package pl.com.myprojekt.db_in_memory.controller;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.intellij.uiDesigner.core.Spacer;
 import pl.com.myprojekt.db_in_memory.dao.StudentDao;
 import pl.com.myprojekt.db_in_memory.db.StudentDB;
 import pl.com.myprojekt.db_in_memory.entity.ExamsName;
@@ -145,42 +144,69 @@ public class StudentControllerTrue extends JFrame {
         createButtonButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                StudentUITM studentUITM = new StudentUITM(
-                        Integer.parseInt(setYearFild.getText()),
-                        setNameField.getText(),
-                        setSurnameFild.getText(),
-                        new int[]{
-                                Integer.parseInt(setMathField.getText()),
-                                Integer.parseInt(setEnglishField.getText()),
-                                Integer.parseInt(setProgramingField.getText()),
-                                Integer.parseInt(setHistoryField.getText()),
-                                Integer.parseInt(setPhysicsField.getText())}
-                );
-                setOperationIformation.setText(update(studentUITM));
+                try {
+                    if (setNameField.getText().isBlank() ||
+                            setSurnameFild.getText().isBlank() || setYearFild.getText().isEmpty() ||
+                            setMathField.getText().isBlank() || setEnglishField.getText().isBlank() ||
+                            setProgramingField.getText().isBlank() || setHistoryField.getText().isBlank() ||
+                            setPhysicsField.getText().isBlank()) {
+                        setOperationIformation.setText("Fill in the fields correctly ");
+                    } else {
+                        StudentUITM studentUITM = new StudentUITM(
+                                Integer.parseInt(setYearFild.getText()),
+                                setNameField.getText(),
+                                setSurnameFild.getText(),
+                                new int[]{
+                                        Integer.parseInt(setMathField.getText()),
+                                        Integer.parseInt(setEnglishField.getText()),
+                                        Integer.parseInt(setProgramingField.getText()),
+                                        Integer.parseInt(setHistoryField.getText()),
+                                        Integer.parseInt(setPhysicsField.getText())}
+                        );
+                        setOperationIformation.setText(update(studentUITM));
+                    }
+                } catch (Exception exception) {
+                    setOperationIformation.setText("Fill in the fields correctly ID");
+                }
                 clear();
                 refreshArray();
+                refreshArrayStudentSortedByMark();
+                refreshArrayStudentSortedByAge();
             }
         });
 
         updateButtonButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    if (setIDField.getText().isBlank() || setNameField.getText().isBlank() ||
+                            setSurnameFild.getText().isBlank() || setYearFild.getText().isEmpty() ||
+                            setMathField.getText().isBlank() || setEnglishField.getText().isBlank() ||
+                            setProgramingField.getText().isBlank() || setHistoryField.getText().isBlank() ||
+                            setPhysicsField.getText().isBlank()) {
+                        setOperationIformation.setText("Fill in the fields correctly ");
+                    } else {
 
-                StudentUITM studentUITM = new StudentUITM();
-                studentUITM.setId(setIDField.getText());
-                studentUITM.setName(setNameField.getText());
-                studentUITM.setSurname(setSurnameFild.getText());
-                studentUITM.setYearOfBirth(Integer.parseInt(setYearFild.getText()));
-                studentUITM.setGradesForTheExam(new int[]{
-                        Integer.parseInt(setMathField.getText()),
-                        Integer.parseInt(setEnglishField.getText()),
-                        Integer.parseInt(setProgramingField.getText()),
-                        Integer.parseInt(setHistoryField.getText()),
-                        Integer.parseInt(setPhysicsField.getText())});
-                setOperationIformation.setText(studentService.update(studentUITM));
+                        StudentUITM studentUITM = new StudentUITM();
+                        studentUITM.setName(setNameField.getText());
+                        studentUITM.setId(setIDField.getText());
+                        studentUITM.setSurname(setSurnameFild.getText());
+                        studentUITM.setYearOfBirth(Integer.parseInt(setYearFild.getText()));
+                        studentUITM.setGradesForTheExam(new int[]{
+                                Integer.parseInt(setMathField.getText()),
+                                Integer.parseInt(setEnglishField.getText()),
+                                Integer.parseInt(setProgramingField.getText()),
+                                Integer.parseInt(setHistoryField.getText()),
+                                Integer.parseInt(setPhysicsField.getText())});
+                        setOperationIformation.setText(studentService.update(studentUITM));
+                    }
+                } catch (Exception exception) {
+                    setOperationIformation.setText("Fill in the fields correctly ID");
+                }
                 clear();
                 refreshArray();
+                refreshArrayStudentSortedByMark();
+                refreshArrayStudentSortedByAge();
 
             }
         });
@@ -193,9 +219,19 @@ public class StudentControllerTrue extends JFrame {
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setOperationIformation.setText(studentService.delete(setIDField.getText()));
+                try {
+                    if (setIDField.getText().isBlank()) {
+                        setOperationIformation.setText("Fill in the fields correctly ID");
+                    } else {
+                        setOperationIformation.setText(studentService.delete(setIDField.getText()));
+                    }
+                } catch (Exception exception) {
+                    setOperationIformation.setText("Fill in the fields correctly ID");
+                }
                 clear();
                 refreshArray();
+                refreshArrayStudentSortedByMark();
+                refreshArrayStudentSortedByAge();
             }
         });
         deleteAllButton.addActionListener(new ActionListener() {
@@ -203,6 +239,8 @@ public class StudentControllerTrue extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 setOperationIformation.setText(studentService.deleteAll());
                 refreshArray();
+                refreshArrayStudentSortedByMark();
+                refreshArrayStudentSortedByAge();
             }
         });
         radioButtonOne.addActionListener(new ActionListener() {
@@ -300,8 +338,7 @@ public class StudentControllerTrue extends JFrame {
             System.out.println(student.getId());
             listStudentModel.addElement(student.getName() + " " + student.getSurname());
         }
-        refreshArrayStudentSortedByMark();
-        refreshArrayStudentSortedByAge();
+
     }
 
     private static void refreshArrayStudentSortedByAge() {
@@ -637,21 +674,21 @@ public class StudentControllerTrue extends JFrame {
         radioButtonFive = new JRadioButton();
         radioButtonFive.setText("Assessment-5");
         panelTree.add(radioButtonFive, new GridConstraints(15, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JPanel panel2 = new JPanel();
-        panel2.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
-        AllStudentIformations.addTab("Untitled", panel2);
+        StudentSort = new JPanel();
+        StudentSort.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
+        AllStudentIformations.addTab("Untitled", StudentSort);
         final JLabel label12 = new JLabel();
         label12.setText("Students sorted by age");
-        panel2.add(label12, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        StudentSort.add(label12, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         listStudentWithFour = new JList();
-        panel2.add(listStudentWithFour, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        StudentSort.add(listStudentWithFour, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
         final JLabel label13 = new JLabel();
         label13.setText("Students with an average grade of four or more");
-        panel2.add(label13, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        StudentSort.add(label13, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         listStudentSortedByAge = new JList();
         final DefaultListModel defaultListModel1 = new DefaultListModel();
         listStudentSortedByAge.setModel(defaultListModel1);
-        panel2.add(listStudentSortedByAge, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        StudentSort.add(listStudentSortedByAge, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
     }
 
     /**
