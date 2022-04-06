@@ -73,10 +73,7 @@ public class StudentDB {
     }
 
     private Boolean isYearStudent(int year) {
-        if (year > MINIMAL_STUDENT_YEAR || year < MAX_STUDENT_YEAR) {
-            return false;
-        }
-        return true;
+        return year <= MINIMAL_STUDENT_YEAR && year >= MAX_STUDENT_YEAR;
     }
 
     public StudentUITM findById(final String id) {
