@@ -14,6 +14,17 @@ public class StudentDB {
     private static final int MAX_MARK = 5;
     private static final int MIN_MARK = 1;
     private static StudentUITM[] students = new StudentUITM[START_ARRAY_SIZE];
+    private static StudentDB instance;
+
+    private StudentDB() {
+    }
+
+    public static StudentDB getInstance() {
+        if (instance == null) {
+            instance = new StudentDB();
+        }
+        return instance;
+    }
 
     public String create(final StudentUITM studentUITM) {
         studentUITM.setId(generateId());

@@ -91,7 +91,7 @@ public class StudentController extends JFrame {
     private JButton cancelButton;
     private JPanel StudentSort;
     private JList list2;
-    private static StudentService studentService = new StudentService(new StudentDao(new StudentDB()));
+    private static StudentService studentService = new StudentService(new StudentDao(StudentDB.getInstance()));
     private static List<StudentUITM> students;
     private static DefaultListModel listStudentModel;
     private static DefaultListModel listStudentModelSortiedByAge;
